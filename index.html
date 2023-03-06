@@ -53,13 +53,22 @@
             }
         }
 
+
+
+
         function game(e) {
             if (e.target !== e.currentTarget) {
                 const computerSelection = getComputerChoice()
                 const playerSelection = e.target.id;
-                console.log("Player: " + playerSelection, "Computer: " + computerSelection)
-                console.log(playRound(playerSelection, computerSelection))
 
+                if (playRound(playerSelection, computerSelection) === "You Win!") {
+                    playerScore.textContent ++;
+                    
+                }
+                else if (playRound(playerSelection, computerSelection) === "You Lose!") {
+                    computerScore.textContent ++;
+                }
+                
             }
             e.stopPropagation();
         }

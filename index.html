@@ -7,13 +7,23 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <div id="rpsButtons">
+        <h1>Select one</h1>
+        <button id="Rock" type="button"> Rock</button>
+        <button id="Paper" type="button"> Paper</button>
+        <button id="Scissors" type="button"> Scissors</button>
+    </div>
+
+    <div>
+        <h1>Results:</h1>
+        
+    </div>
 
 
 
     <script>
         function getComputerChoice() {
-            let choices = ["scissors", "paper", "rock"]
+            let choices = ["Scissors", "Paper", "Rock"]
             let selection = choices[Math.floor(Math.random() * choices.length)]
             return selection
         }
@@ -22,36 +32,56 @@
             if (playerSelection === ComputerSelection) {
                 return "Draw!"
             }
-            else if (playerSelection === "rock" && ComputerSelection === "scissors") {
+            else if (playerSelection === "Rock" && ComputerSelection === "Scissors") {
                 return "You Win!"
             }
-            else if (playerSelection === "paper" && ComputerSelection === "rock") {
+            else if (playerSelection === "Paper" && ComputerSelection === "Rock") {
                 return "You Win!"
             }
-            else if (playerSelection === "scissors" && ComputerSelection === "paper") {
+            else if (playerSelection === "Scissors" && ComputerSelection === "Paper") {
                 return "You Win!"
             }
-            else if (playerSelection === "scissors" && ComputerSelection === "rock"){
+            else if (playerSelection === "Scissors" && ComputerSelection === "Rock"){
                 return "You Lose!"
             }
-            else if (playerSelection === "paper" && ComputerSelection === "scissors"){
+            else if (playerSelection === "Paper" && ComputerSelection === "Scissors"){
                 return "You Lose!"
             }
-            else if (playerSelection === "rock" && ComputerSelection === "paper"){
+            else if (playerSelection === "Rock" && ComputerSelection === "Paper"){
                 return "You Lose!"
             }
         }
+        const buttons = document.querySelector("#rpsButtons");
+        buttons.addEventListener("click", game);
 
-        function game() {
-            for (let i = 0; i < 5; i++) {
-                const playerSelection = prompt("Pick rock, paper or scissors")
+        
+
+        function game(e) {
+            if (e.target !== e.currentTarget) {
                 const computerSelection = getComputerChoice()
-                console.log(playRound(playerSelection.toLowerCase(), computerSelection))
+                const playerSelection = e.target.id;
+                console.log("Player: " + playerSelection, "Computer: " + computerSelection)
+                console.log(playRound(playerSelection, computerSelection))
+
             }
+            e.stopPropagation();
         }
 
 
-        game()
+/*
+        rpsButton.addEventListener("click", function() {
+            const clicked = 
+            const playerSelection = rpsButton,
+            const computerSelection = getComputerChoice(),
+            console.log(playRound(playerSelection.toLowerCase(), computerSelection))
+        })
+*/
+
+
+
+
+
+
 
 
     </script>

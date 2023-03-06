@@ -16,7 +16,8 @@
 
     <div>
         <h1>Results:</h1>
-        
+        <span>Player: <span id="playerScore" >0</span></span>
+        <span>Computer: <span id="computerScore" >0</span></span>
     </div>
 
 
@@ -51,10 +52,6 @@
                 return "You Lose!"
             }
         }
-        const buttons = document.querySelector("#rpsButtons");
-        buttons.addEventListener("click", game);
-
-        
 
         function game(e) {
             if (e.target !== e.currentTarget) {
@@ -68,14 +65,8 @@
         }
 
 
-/*
-        rpsButton.addEventListener("click", function() {
-            const clicked = 
-            const playerSelection = rpsButton,
-            const computerSelection = getComputerChoice(),
-            console.log(playRound(playerSelection.toLowerCase(), computerSelection))
-        })
-*/
+        const buttons = document.querySelector("#rpsButtons");
+        buttons.addEventListener("click", game);
 
 
 

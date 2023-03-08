@@ -1,0 +1,55 @@
+body {
+    background-color:bisque;
+    background-image: url(images/background.jpg);
+    background-size: cover;
+    padding-top: 65px;
+    padding-left: 200px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*border: 1px solid red;*/
+}
+
+.header {
+    font-size: 50px;
+}
+
+.option {
+    font-size: 35px;
+}
+
+#rpsButtons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.btnImg {
+    display: flex;
+    flex-direction: column;
+    padding:50px;
+}
+
+img {
+    padding-bottom:30px;
+    width: 80px;
+    height: auto;
+}
+
+button {
+    padding: 5px;
+}
+
+#score {
+    border: solid red 1px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 
+turn images into buttons
+add animations to the buttons when clicked
+show what the computers chose on the right side and what you chose on the left side

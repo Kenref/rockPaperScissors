@@ -5,21 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" >
 </head>
 <body>
+    <h1 class="header">Welcome to Rock Paper Scissors</h1>
+    <h2 class="option">How are you feeling?</h2>
+
     <div id="rpsButtons">
-        <h1>Select one</h1>
-        <button id="Rock" type="button"> Rock</button>
-        <button id="Paper" type="button"> Paper</button>
-        <button id="Scissors" type="button"> Scissors</button>
+
+    <div class="btnImg">
+        <img src="images/rock.png" alt="A rockstar image for rock">
+        <button id="Rock"> Rock</button>
     </div>
 
-    <div>
-        <h1>Results:</h1>
+    <div class="btnImg">
+        <img src="images/paper.png" alt="A toilet paper roll for paper">
+        <button id="Paper"> Paper</button>
+    </div>
+
+    <div class="btnImg">
+        <img src="images/scissors.png" alt="A pair of sheers for scissors">
+        <button id="Scissors"> Scissors</button>
+    </div>
+    </div>
+
+    <div id="score">
+        <h2>Score:</h2>
         <span>Player: <span id="playerScore" >0</span></span>
         <span>Computer: <span id="computerScore" >0</span></span>
     </div>
 
+    <div id="result">
+
+    </div>
 
 
     <script>
@@ -60,6 +78,7 @@
             if (e.target !== e.currentTarget) {
                 const computerSelection = getComputerChoice()
                 const playerSelection = e.target.id;
+                
 
                 if (playRound(playerSelection, computerSelection) === "You Win!") {
                     playerScore.textContent ++;
@@ -68,7 +87,23 @@
                 else if (playRound(playerSelection, computerSelection) === "You Lose!") {
                     computerScore.textContent ++;
                 }
+
+            if (Number(playerScore.textContent) == 5 || Number(computerScore.textContent) == 5) {
+                const buttons = document.querySelectorAll("button")
+                const result = document.querySelector("#result")
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].setAttribute("disabled", "")
+                }
+                if (Number(playerScore.textContent) == 5) {
+                    result.innerHTML = "<h1>You Lose</h1>";
+                }
+                else {
+                    result.innerHTML = "<h1>You Lose</h1>";
+                }
                 
+            }
+
+
             }
             e.stopPropagation();
         }
@@ -77,7 +112,7 @@
         const buttons = document.querySelector("#rpsButtons");
         buttons.addEventListener("click", game);
 
-
+        // to restart the game, set the scores back to 0 and set attribute of disabled buttons to false with reove attrriburte
 
 
 

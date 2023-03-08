@@ -11,7 +11,7 @@
     <h1 class="header">Welcome to Rock Paper Scissors</h1>
     <h2 class="option">Pick one</h2>
 
-    <form id="rpsButtons">
+    <form id="playerButtons">
     <div class="btnImg">
         <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
         <h2 class="labels">Rock</h2>
@@ -28,6 +28,27 @@
     </div>
     </form>
 
+    <div id="computerButtons">
+
+        <div class="btnImg">
+            <img id="computerRock" src="images/rock.png" alt="A rockstar image for rock">
+            <h2 class="labels">Rock</h2>
+        </div>
+
+    
+        <div class="btnImg">
+            <img id="computerPaper" src="images/paper.png" alt="A toilet paper roll for paper">
+            <h2 class="labels">Paper</h2>
+        </div>
+    
+        <div class="btnImg">
+            <img id="computerScissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+            <h2 class="labels">Scissors</h2>
+        </div>
+
+    </div>
+
+
     <div id="score">
         <h2>Score:</h2>
         <span>Player: <span id="playerScore" >0</span></span>
@@ -43,6 +64,26 @@
         function getComputerChoice() {
             let choices = ["Scissors", "Paper", "Rock"]
             let selection = choices[Math.floor(Math.random() * choices.length)]
+            rock = document.querySelector("#computerRock")
+            paper = document.querySelector("#computerPaper")
+            scissors = document.querySelector("#computerScissors")
+
+            if (selection === "Rock") {
+                rock.classList.add("computerActive")
+                paper.classList.remove("computerActive")
+                scissors.classList.remove("computerActive")
+            }
+            else if (selection === "Paper") {
+                paper.classList.add("computerActive")
+                rock.classList.remove("computerActive")
+                scissors.classList.remove("computerActive")
+            }
+            else if (selection === "Scissors") {
+                scissors.classList.add("computerActive")
+                rock.classList.remove("computerActive")
+                paper.classList.remove("computerActive")
+            }
+
             return selection
         }
 
@@ -92,6 +133,7 @@
                 const result = document.querySelector("#result")
                 for (let i = 0; i < buttons.length; i++) {
                     buttons[i].setAttribute("disabled", "")
+                    //img.classList.remove("computerActive")
                 }
                 if (Number(playerScore.textContent) == 5) {
                     result.innerHTML = "<h1>You Lose</h1>";
@@ -99,7 +141,7 @@
                 else {
                     result.innerHTML = "<h1>You Lose</h1>";
                 }
-                
+                return false;
             }
 
 
@@ -109,7 +151,7 @@
         }
 
 
-        const buttons = document.querySelector("#rpsButtons");
+        const buttons = document.querySelector("#playerButtons");
         buttons.addEventListener("click", game);
 
         // to restart the game, set the scores back to 0 and set attribute of disabled buttons to false with reove attrriburte

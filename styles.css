@@ -19,7 +19,7 @@ body {
     font-size: 35px;
 }
 
-#rpsButtons {
+#playerButtons, #computerButtons {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -31,7 +31,7 @@ body {
     margin:50px;
 }
 
-input {
+input, img {
     width: 80px;
     height: auto;
     border: solid black 3px;
@@ -60,7 +60,11 @@ input:active {
     flex-direction: column;
 }
 
-
+.computerActive {
+    transform: scale(1.1);
+    border: 5px solid red;
+    box-shadow: 0 0 5px black;
+}
 
 
 

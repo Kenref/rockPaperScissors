@@ -1,10 +1,15 @@
+@font-face {
+    font-family: JoylineNotes;
+    src: url(fonts/JoylineNotes.ttf);
+}
+
 body {
+    font-family: JoyLineNotes, sans-serif;
     background-color:bisque;
     background-image: url(images/background.jpg);
     background-size: cover;
-    padding-top: 65px;
+    padding-top: 30px;
     padding-left: 200px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,23 +17,37 @@ body {
 }
 
 .header {
-    font-size: 50px;
+    font-size: 100px;
 }
 
 .option {
-    font-size: 35px;
+    font-size: 50px;
+}
+
+.container {
+    display: flex;
 }
 
 #playerButtons, #computerButtons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     flex-wrap: wrap;
+}
+
+#playerButtons {
+    margin-right:75px;
+
+}
+
+#computerButtons, .right {
+    margin-left: 75px;
+
 }
 
 .btnImg {
     display: flex;
     flex-direction: column;
-    margin:50px;
+    margin:20px;
 }
 
 input, img {
@@ -52,17 +71,37 @@ input:active {
 .labels {
     text-align: center;
     margin-top: 10px;
+    font-size: 40px;
 }
 
-#score {
-    border: solid red 1px;
+.scores {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding-left: 20px;
+    
+}
+
+.separateFont {
+    font-size:35px;
+    font-weight: 700;
+
+}
+
+#playerScore, #computerScore {
+    font-family: cursive;
 }
 
 .computerActive {
     transform: scale(1.1);
     border: 5px solid red;
+    box-shadow: 0 0 5px black;
+}
+
+.playerWin {
+    transform: scale(1.1);
+    border: 5px solid blue;
     box-shadow: 0 0 5px black;
 }
 
@@ -73,12 +112,3 @@ input:active {
 
 
 
-
-
-/* 
-turn images into buttons //
-add animations to the buttons when clicked
-show what the computers chose on the right side and what you chose on the left side
-add pop up box to play again
-whoever wins their buttons on that side with flash with transform scale up
-for the npc do input:focus with effects

@@ -9,51 +9,72 @@
 </head>
 <body>
     <h1 class="header">Welcome to Rock Paper Scissors</h1>
-    <h2 class="option">Pick one</h2>
+    <h2 class="option">Pick an option</h2>
 
-    <form id="playerButtons">
-    <div class="btnImg">
-        <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
-        <h2 class="labels">Rock</h2>
-    </div>
+    <div class="container">
+        <div class="buttonAndScores">
 
-    <div class="btnImg">
-        <input type="image" id="Paper" src="images/paper.png" alt="A toilet paper roll for paper">
-        <h2 class="labels">Paper</h2>
-    </div>
+            <div class="scores">
+                <span class="separateFont">Player: <span id="playerScore" >0</span></span>
+            </div>
 
-    <div class="btnImg">
-        <input type="image" id="Scissors" src="images/scissors.png" alt="A pair of sheers for scissors">
-        <h2 class="labels">Scissors</h2>
-    </div>
-    </form>
-
-    <div id="computerButtons">
-
+        <form id="playerButtons">
         <div class="btnImg">
-            <img id="computerRock" src="images/rock.png" alt="A rockstar image for rock">
+            <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
             <h2 class="labels">Rock</h2>
         </div>
-
-    
         <div class="btnImg">
-            <img id="computerPaper" src="images/paper.png" alt="A toilet paper roll for paper">
+            <input type="image" id="Paper" src="images/paper.png" alt="A toilet paper roll for paper">
             <h2 class="labels">Paper</h2>
         </div>
-    
         <div class="btnImg">
-            <img id="computerScissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+            <input type="image" id="Scissors" src="images/scissors.png" alt="A pair of sheers for scissors">
             <h2 class="labels">Scissors</h2>
         </div>
+        </form>
+
+
 
     </div>
+    <div class="buttonAndScores">
+
+        <div class="scores right">
+            <span class="separateFont">Computer: <span id="computerScore" >0</span></span>
+        </div>
+
+        <div id="computerButtons">
+            <div class="btnImg">
+                <img id="computerRock" src="images/rock.png" alt="A rockstar image for rock">
+                <h2 class="labels">Rock</h2>
+            </div>
+            <div class="btnImg">
+                <img id="computerPaper" src="images/paper.png" alt="A toilet paper roll for paper">
+                <h2 class="labels">Paper</h2>
+            </div>
+            <div class="btnImg">
+                <img id="computerScissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+                <h2 class="labels">Scissors</h2>
+            </div>
+        </div>
 
 
-    <div id="score">
-        <h2>Score:</h2>
+
+    </div>
+</div>
+<!--
+    <div class="scores">
+        <div>
+        <h2>Player Score:</h2>
         <span>Player: <span id="playerScore" >0</span></span>
+        </div>
+
+        <div class="scores">
+        <h2>Computer Score:</h2>
         <span>Computer: <span id="computerScore" >0</span></span>
     </div>
+-->
+    </div>
+
 
     <div id="result">
 
@@ -62,29 +83,24 @@
 
     <script>
         function getComputerChoice() {
-            let choices = ["Scissors", "Paper", "Rock"]
-            let selection = choices[Math.floor(Math.random() * choices.length)]
-            rock = document.querySelector("#computerRock")
-            paper = document.querySelector("#computerPaper")
-            scissors = document.querySelector("#computerScissors")
-
-            if (selection === "Rock") {
-                rock.classList.add("computerActive")
-                paper.classList.remove("computerActive")
-                scissors.classList.remove("computerActive")
-            }
-            else if (selection === "Paper") {
-                paper.classList.add("computerActive")
-                rock.classList.remove("computerActive")
-                scissors.classList.remove("computerActive")
-            }
-            else if (selection === "Scissors") {
-                scissors.classList.add("computerActive")
-                rock.classList.remove("computerActive")
-                paper.classList.remove("computerActive")
-            }
-
-            return selection
+            const choices = {
+                Rock: "#computerRock",
+                Paper: "#computerPaper",
+                Scissors: "#computerScissors",
+            };
+        
+            const classToAdd = "computerActive";
+            const selection = Object.keys(choices)[Math.floor(Math.random() * 3)];
+            
+            Object.values(choices).forEach(selector => {
+                const element = document.querySelector(selector);
+                element.classList.remove(classToAdd);
+                if (selector === choices[selection]) {
+                element.classList.add(classToAdd);
+                }
+            });
+            
+            return selection;
         }
 
         function playRound(playerSelection, ComputerSelection) {
@@ -130,18 +146,27 @@
                 
             if (Number(playerScore.textContent) == 5 || Number(computerScore.textContent) == 5) {
                 const buttons = document.querySelectorAll("input")
+                const imgs = document.querySelectorAll("img")
                 const result = document.querySelector("#result")
                 for (let i = 0; i < buttons.length; i++) {
                     buttons[i].setAttribute("disabled", "")
-                    //img.classList.remove("computerActive")
+                    
                 }
+                //can add class to innerHTML
                 if (Number(playerScore.textContent) == 5) {
-                    result.innerHTML = "<h1>You Lose</h1>";
+                    result.innerHTML = "<h1>You Win</h1>";
+                    for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].classList.add("playerWin")
+                    imgs[i].classList.remove("computerActive")
+                }
                 }
                 else {
                     result.innerHTML = "<h1>You Lose</h1>";
+                    for (let i = 0; i < imgs.length; i++) {
+                    imgs[i].classList.add("computerActive")
                 }
-                return false;
+                }
+
             }
 
 
@@ -155,7 +180,7 @@
         buttons.addEventListener("click", game);
 
         // to restart the game, set the scores back to 0 and set attribute of disabled buttons to false with reove attrriburte
-
+        //add a play again button
 
 
 

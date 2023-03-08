@@ -9,25 +9,24 @@
 </head>
 <body>
     <h1 class="header">Welcome to Rock Paper Scissors</h1>
-    <h2 class="option">How are you feeling?</h2>
+    <h2 class="option">Pick one</h2>
 
-    <div id="rpsButtons">
-
+    <form id="rpsButtons">
     <div class="btnImg">
-        <img src="images/rock.png" alt="A rockstar image for rock">
-        <button id="Rock"> Rock</button>
-    </div>
-
-    <div class="btnImg">
-        <img src="images/paper.png" alt="A toilet paper roll for paper">
-        <button id="Paper"> Paper</button>
+        <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
+        <h2 class="labels">Rock</h2>
     </div>
 
     <div class="btnImg">
-        <img src="images/scissors.png" alt="A pair of sheers for scissors">
-        <button id="Scissors"> Scissors</button>
+        <input type="image" id="Paper" src="images/paper.png" alt="A toilet paper roll for paper">
+        <h2 class="labels">Paper</h2>
     </div>
+
+    <div class="btnImg">
+        <input type="image" id="Scissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+        <h2 class="labels">Scissors</h2>
     </div>
+    </form>
 
     <div id="score">
         <h2>Score:</h2>
@@ -87,9 +86,9 @@
                 else if (playRound(playerSelection, computerSelection) === "You Lose!") {
                     computerScore.textContent ++;
                 }
-
+                
             if (Number(playerScore.textContent) == 5 || Number(computerScore.textContent) == 5) {
-                const buttons = document.querySelectorAll("button")
+                const buttons = document.querySelectorAll("input")
                 const result = document.querySelector("#result")
                 for (let i = 0; i < buttons.length; i++) {
                     buttons[i].setAttribute("disabled", "")
@@ -105,7 +104,8 @@
 
 
             }
-            e.stopPropagation();
+            //e.stopPropagation();
+            e.preventDefault();
         }
 
 

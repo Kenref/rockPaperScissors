@@ -9,7 +9,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /*border: 1px solid red;*/
 }
 
 .header {
@@ -29,17 +28,30 @@ body {
 .btnImg {
     display: flex;
     flex-direction: column;
-    padding:50px;
+    margin:50px;
 }
 
-img {
-    padding-bottom:30px;
+input {
     width: 80px;
     height: auto;
+    border: solid black 3px;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-button {
-    padding: 5px;
+input:focus {
+    transform: scale(1.1);
+    border: 5px solid blue;
+    box-shadow: 0 0 5px black;
+}
+
+input:active {
+    transform: scale(1.2)
+}
+
+.labels {
+    text-align: center;
+    margin-top: 10px;
 }
 
 #score {
@@ -49,7 +61,20 @@ button {
 }
 
 
+
+
+
+
+
+
+
+
+
+
 /* 
-turn images into buttons
+turn images into buttons //
 add animations to the buttons when clicked
 show what the computers chose on the right side and what you chose on the left side
+add pop up box to play again
+whoever wins their buttons on that side with flash with transform scale up
+for the npc do input:focus with effects

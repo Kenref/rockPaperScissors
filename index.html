@@ -5,55 +5,156 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" >
 </head>
 <body>
-    
-
+    <h1 class="header">Welcome to Rock Paper Scissors</h1>
+    <div id="result">
+        <h1 class="option">First to five points wins</h1>
+    </div>
+    <div class="container">
+        <div class="buttonAndScores">
+            <div class="scores">
+                <span class="separateFont">Player: <span id="playerScore" >0</span></span>
+            </div>
+        <form id="playerButtons">
+        <div class="btnImg">
+            <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
+            <h2 class="labels">Rock</h2>
+        </div>
+        <div class="btnImg">
+            <input type="image" id="Paper" src="images/paper.png" alt="A toilet paper roll for paper">
+            <h2 class="labels">Paper</h2>
+        </div>
+        <div class="btnImg">
+            <input type="image" id="Scissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+            <h2 class="labels">Scissors</h2>
+        </div>
+        </form>
+    </div>
+    <div class="buttonAndScores">
+        <div class="scores right">
+            <span class="separateFont">Computer: <span id="computerScore" >0</span></span>
+        </div>
+        <div id="computerButtons">
+            <div class="btnImg">
+                <img id="computerRock" src="images/rock.png" alt="A rockstar image for rock">
+                <h2 class="labels">Rock</h2>
+            </div>
+            <div class="btnImg">
+                <img id="computerPaper" src="images/paper.png" alt="A toilet paper roll for paper">
+                <h2 class="labels">Paper</h2>
+            </div>
+            <div class="btnImg">
+                <img id="computerScissors" src="images/scissors.png" alt="A pair of sheers for scissors">
+                <h2 class="labels">Scissors</h2>
+            </div>
+        </div>
+    </div>
+</div>
+    <button class="playAgainInvisible playAgainStyle" type="button">Play again</button>        
 
 
     <script>
         function getComputerChoice() {
-            let choices = ["scissors", "paper", "rock"]
-            let selection = choices[Math.floor(Math.random() * choices.length)]
-            return selection
+            const choices = {
+                Rock: "#computerRock",
+                Paper: "#computerPaper",
+                Scissors: "#computerScissors",
+            };
+        
+            const classToAdd = "computerActive";
+            const selection = Object.keys(choices)[Math.floor(Math.random() * 3)];
+            
+            Object.values(choices).forEach(selector => {
+                const element = document.querySelector(selector);
+                element.classList.remove(classToAdd);
+                if (selector === choices[selection]) {
+                element.classList.add(classToAdd);
+                }
+            });
+            
+            return selection;
         }
 
         function playRound(playerSelection, ComputerSelection) {
             if (playerSelection === ComputerSelection) {
                 return "Draw!"
             }
-            else if (playerSelection === "rock" && ComputerSelection === "scissors") {
-                return "CPU picked scissors. You Win!"
+            else if (playerSelection === "Rock" && ComputerSelection === "Scissors") {
+                return "You Win!"
             }
-            else if (playerSelection === "paper" && ComputerSelection === "rock") {
-                return "CPU picked rock. You Win!"
+            else if (playerSelection === "Paper" && ComputerSelection === "Rock") {
+                return "You Win!"
             }
-            else if (playerSelection === "scissors" && ComputerSelection === "paper") {
-                return "CPU picked paper. You Win!"
+            else if (playerSelection === "Scissors" && ComputerSelection === "Paper") {
+                return "You Win!"
             }
-            else if (playerSelection === "scissors" && ComputerSelection === "rock"){
-                return "CPU picked rock. You Lose!"
+            else if (playerSelection === "Scissors" && ComputerSelection === "Rock"){
+                return "You Lose!"
             }
-            else if (playerSelection === "paper" && ComputerSelection === "scissors"){
-                return "CPU picked scissors. You Lose!"
+            else if (playerSelection === "Paper" && ComputerSelection === "Scissors"){
+                return "You Lose!"
             }
-            else if (playerSelection === "rock" && ComputerSelection === "paper"){
-                return "CPU picked paper. You Lose!"
+            else if (playerSelection === "Rock" && ComputerSelection === "Paper"){
+                return "You Lose!"
             }
         }
 
-        function game() {
-            for (let i = 0; i < 5; i++) {
-                const playerSelection = prompt("Pick rock, paper or scissors")
+        const playAgain = document.querySelector(".playAgainInvisible")
+
+        function game(e) {
+            if (e.target !== e.currentTarget) {
                 const computerSelection = getComputerChoice()
-                console.log(playRound(playerSelection.toLowerCase(), computerSelection))
+                const playerSelection = e.target.id;
+                
+                if (playRound(playerSelection, computerSelection) === "You Win!") {
+                    playerScore.textContent ++;
+                    
+                }
+                else if (playRound(playerSelection, computerSelection) === "You Lose!") {
+                    computerScore.textContent ++;
+                }
+                
+            if (Number(playerScore.textContent) == 5 || Number(computerScore.textContent) == 5) {
+                const buttons = document.querySelectorAll("input")
+                const imgs = document.querySelectorAll("img")
+                const result = document.querySelector("#result")
+
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].setAttribute("disabled", "")
+                }
+
+                if (Number(playerScore.textContent) == 5) {
+                    result.textContent = "You Win";
+                    result.classList.add("resultWin")
+                    for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].classList.add("playerWin")
+                    imgs[i].classList.remove("computerActive")
+                    }
+                }
+                else if (Number(computerScore.textContent) == 5) {
+                    result.textContent = "You Lose";
+                    result.classList.add("resultLose")
+                    for (let i = 0; i < imgs.length; i++) {
+                    imgs[i].classList.add("computerActive")
+                    }
+                }
+                playAgain.classList.remove("playAgainInvisible");
             }
+            }
+            e.preventDefault();
         }
 
+        const buttons = document.querySelector("#playerButtons");
+        buttons.addEventListener("click", game);
 
-        game()
+        function gameReset() {
+            location.reload()
+        }
 
-
+        playAgain.addEventListener("click", gameReset)
+        
     </script>
 </body>
 </html>

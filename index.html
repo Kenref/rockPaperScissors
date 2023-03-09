@@ -9,15 +9,14 @@
 </head>
 <body>
     <h1 class="header">Welcome to Rock Paper Scissors</h1>
-    <h2 class="option">Pick an option</h2>
-
+    <div id="result">
+        <h1 class="option">First to five points wins</h1>
+    </div>
     <div class="container">
         <div class="buttonAndScores">
-
             <div class="scores">
                 <span class="separateFont">Player: <span id="playerScore" >0</span></span>
             </div>
-
         <form id="playerButtons">
         <div class="btnImg">
             <input type="image" id="Rock" src="images/rock.png" alt="A rockstar image for rock">
@@ -32,16 +31,11 @@
             <h2 class="labels">Scissors</h2>
         </div>
         </form>
-
-
-
     </div>
     <div class="buttonAndScores">
-
         <div class="scores right">
             <span class="separateFont">Computer: <span id="computerScore" >0</span></span>
         </div>
-
         <div id="computerButtons">
             <div class="btnImg">
                 <img id="computerRock" src="images/rock.png" alt="A rockstar image for rock">
@@ -56,29 +50,9 @@
                 <h2 class="labels">Scissors</h2>
             </div>
         </div>
-
-
-
     </div>
 </div>
-<!--
-    <div class="scores">
-        <div>
-        <h2>Player Score:</h2>
-        <span>Player: <span id="playerScore" >0</span></span>
-        </div>
-
-        <div class="scores">
-        <h2>Computer Score:</h2>
-        <span>Computer: <span id="computerScore" >0</span></span>
-    </div>
--->
-    </div>
-
-
-    <div id="result">
-
-    </div>
+    <button class="playAgainInvisible playAgainStyle" type="button">Play again</button>        
 
 
     <script>
@@ -127,15 +101,13 @@
             }
         }
 
-
-
+        const playAgain = document.querySelector(".playAgainInvisible")
 
         function game(e) {
             if (e.target !== e.currentTarget) {
                 const computerSelection = getComputerChoice()
                 const playerSelection = e.target.id;
                 
-
                 if (playRound(playerSelection, computerSelection) === "You Win!") {
                     playerScore.textContent ++;
                     
@@ -148,44 +120,41 @@
                 const buttons = document.querySelectorAll("input")
                 const imgs = document.querySelectorAll("img")
                 const result = document.querySelector("#result")
+
                 for (let i = 0; i < buttons.length; i++) {
                     buttons[i].setAttribute("disabled", "")
-                    
                 }
-                //can add class to innerHTML
+
                 if (Number(playerScore.textContent) == 5) {
-                    result.innerHTML = "<h1>You Win</h1>";
+                    result.textContent = "You Win";
+                    result.classList.add("resultWin")
                     for (let i = 0; i < buttons.length; i++) {
                     buttons[i].classList.add("playerWin")
                     imgs[i].classList.remove("computerActive")
+                    }
                 }
-                }
-                else {
-                    result.innerHTML = "<h1>You Lose</h1>";
+                else if (Number(computerScore.textContent) == 5) {
+                    result.textContent = "You Lose";
+                    result.classList.add("resultLose")
                     for (let i = 0; i < imgs.length; i++) {
                     imgs[i].classList.add("computerActive")
+                    }
                 }
-                }
-
+                playAgain.classList.remove("playAgainInvisible");
             }
-
-
             }
-            //e.stopPropagation();
             e.preventDefault();
         }
-
 
         const buttons = document.querySelector("#playerButtons");
         buttons.addEventListener("click", game);
 
-        // to restart the game, set the scores back to 0 and set attribute of disabled buttons to false with reove attrriburte
-        //add a play again button
+        function gameReset() {
+            location.reload()
+        }
 
-
-
-
-
+        playAgain.addEventListener("click", gameReset)
+        
     </script>
 </body>
 </html>

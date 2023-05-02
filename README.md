@@ -7,9 +7,7 @@
     <li>Winner will be highlighted</li>
     <li>Option to play again</li>
 </ul>
-
 <br>
-
 <h2>Languages:</h2>
 <ul>
     <li>HTML</li>
@@ -17,7 +15,6 @@
     <li>JS</li>
 </ul>
 <br>
-
 <h2>Challenges</h2>
 <ul>
     <li>Implementing event listeners for the first time</li>
